@@ -1,0 +1,23 @@
+{
+  "check_coverage": true,
+  "per_file": true,
+  "sourceMap": false,
+  "instrument": false,
+  "include": [
+    "src/**/*.js"
+  ],
+  "exclude": [
+    "dist",
+    "test",
+    "coverage",
+    ".nyc_output"
+  ],
+  "require": [
+    "babel-register"
+  ],
+  "reporter": [
+    "lcov",
+    "text-summary",
+    "text"
+  ]
+}
