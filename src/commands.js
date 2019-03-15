@@ -2,6 +2,10 @@ export class RoverCommand {
   constructor(rover) {
     this.rover = rover;
   }
+
+  execute() {
+    throw new Error(`Attempting to use abstract RoverCommand on rover- ${this.rover}`);
+  }
 }
 
 export class RoverMoveForward extends RoverCommand {

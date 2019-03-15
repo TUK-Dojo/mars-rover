@@ -3,20 +3,14 @@ import Planet from './planet';
 
 class Rover {
   constructor(location, gridMax) {
-    this.planetLocation = new Planet(location[0], location[1], gridMax);
+    this.planetLocation = new Planet(location, gridMax);
     this.roverDirection = new Direction(location[2]);
   }
 
-  get direction() {
-    return this.roverDirection.getLabel();
-  }
-
-  get xPosition() {
-    return this.planetLocation.xPosition;
-  }
-
-  get yPosition() {
-    return this.planetLocation.yPosition;
+  get location() {
+    return [
+      this.planetLocation.xPosition, this.planetLocation.yPosition, this.roverDirection.getLabel(),
+    ];
   }
 
   moveBackward() {
@@ -24,7 +18,7 @@ class Rover {
   }
 
   moveForward() {
-    this.planetLocation.move(this.direction);
+    this.planetLocation.move(this.roverDirection.getLabel());
   }
 
   rotateLeft() {

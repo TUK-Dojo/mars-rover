@@ -1,7 +1,5 @@
 const CARDINAL = ['N', 'E', 'S', 'W'];
-const LEFT = CARDINAL.length - 1;
-const INVERT = CARDINAL.length / 2;
-const RIGHT = 1;
+const DIRECTION = { Left: CARDINAL.length - 1, Invert: CARDINAL.length / 2, Right: 1 };
 
 const getNewDirection = (dir, modifier) => (dir + modifier) % CARDINAL.length;
 
@@ -11,7 +9,7 @@ class Direction {
   }
 
   getInverseLabel() {
-    return CARDINAL[getNewDirection(this.dir, INVERT)];
+    return CARDINAL[getNewDirection(this.dir, DIRECTION.Invert)];
   }
 
   getLabel() {
@@ -19,11 +17,11 @@ class Direction {
   }
 
   rotateLeft() {
-    this.dir = getNewDirection(this.dir, LEFT);
+    this.dir = getNewDirection(this.dir, DIRECTION.Left);
   }
 
   rotateRight() {
-    this.dir = getNewDirection(this.dir, RIGHT);
+    this.dir = getNewDirection(this.dir, DIRECTION.Right);
   }
 }
 

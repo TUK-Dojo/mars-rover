@@ -1,28 +1,19 @@
 const getNewPosition = (position, modifier, limit) => (position + modifier) % (limit + 1);
 
 class Planet {
-  constructor(x, y, max) {
-    [this.maximumX, this.maximumY] = max;
-    this.xPosition = x;
-    this.yPosition = y;
+  constructor(location, gridMax) {
+    [this.maximumX, this.maximumY] = gridMax;
+    [this.xPosition, this.yPosition] = location;
   }
 
   move(direction) {
     const moveCommands = {
-      N: () => {
-        this.yPosition = getNewPosition(this.yPosition, 1, this.maximumY);
-      },
-      E: () => {
-        this.xPosition = getNewPosition(this.xPosition, 1, this.maximumX);
-      },
-      S: () => {
-        this.yPosition = getNewPosition(this.yPosition, this.maximumY, this.maximumY);
-      },
-      W: () => {
-        this.xPosition = getNewPosition(this.xPosition, this.maximumX, this.maximumX);
-      },
+      N: () => [this.xPosition, getNewPosition(this.yPosition, 1, this.maximumY)],
+      E: () => [getNewPosition(this.xPosition, 1, this.maximumX), this.yPosition],
+      S: () => [this.xPosition, getNewPosition(this.yPosition, this.maximumY, this.maximumY)],
+      W: () => [getNewPosition(this.xPosition, this.maximumX, this.maximumX), this.yPosition],
     };
-    moveCommands[direction]();
+    [this.xPosition, this.yPosition] = moveCommands[direction]();
   }
 }
 

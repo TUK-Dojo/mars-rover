@@ -8,11 +8,7 @@ class CommandProcessor extends RoverCommand {
   }
 
   execute(command) {
-    this.locationHistory.push([
-      this.rover.xPosition,
-      this.rover.yPosition,
-      this.rover.direction,
-    ]);
+    this.locationHistory.push(this.rover.location);
     CommandBuilder.build(this.rover, command).execute();
   }
 }
