@@ -5,19 +5,13 @@ import {
   RoverMoveBackward,
 } from './commands';
 
+const COMMANDS = {
+  L: rover => new RoverTurnLeft(rover),
+  R: rover => new RoverTurnRight(rover),
+  F: rover => new RoverMoveForward(rover),
+  B: rover => new RoverMoveBackward(rover),
+};
+
 export default {
-  build: (rover, command, grid) => {
-    switch (command) {
-      case 'L':
-        return new RoverTurnLeft(rover, grid);
-      case 'R':
-        return new RoverTurnRight(rover, grid);
-      case 'F':
-        return new RoverMoveForward(rover, grid);
-      case 'B':
-        return new RoverMoveBackward(rover, grid);
-      default:
-        throw new Error('Received unexpected command');
-    }
-  },
+  build: (rover, command) => COMMANDS[command](rover),
 };

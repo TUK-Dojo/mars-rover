@@ -1,15 +1,14 @@
 import Rover from './rover';
-import processor from './commandProcessor';
-import CommandBuilder from './commandBuilder';
-import PlanetGrid from './grid';
+import CommandProcessor from './commandProcessor';
 
-const controller = (initialPosition, commands, grid = [20, 20]) => {
-  const rover = new Rover(initialPosition);
-  const planet = new PlanetGrid(grid);
-  commands.forEach((command) => {
-    processor(CommandBuilder.build(rover, command, planet));
-  });
-  return rover.location;
+const controller = (initialPosition, commands, gridMax = [20, 20]) => {
+  const rover = new Rover(initialPosition, gridMax);
+  const processor = new CommandProcessor(rover);
+  commands.forEach(command => processor.execute(command));
+  return {
+    history: processor.locationHistory,
+    location: [rover.xPosition, rover.yPosition, rover.direction],
+  };
 };
 
 export default controller;

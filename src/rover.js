@@ -1,34 +1,38 @@
+import Direction from './direction';
+import Planet from './planet';
+
 class Rover {
-  constructor(location) {
-    [this.x, this.y, this.dir] = location;
+  constructor(location, gridMax) {
+    this.planetLocation = new Planet(location[0], location[1], gridMax);
+    this.roverDirection = new Direction(location[2]);
   }
 
   get direction() {
-    return this.dir;
+    return this.roverDirection.getLabel();
   }
 
   get xPosition() {
-    return this.x;
+    return this.planetLocation.xPosition;
   }
 
   get yPosition() {
-    return this.y;
+    return this.planetLocation.yPosition;
   }
 
-  get location() {
-    return [this.x, this.y, this.direction];
+  moveBackward() {
+    this.planetLocation.move(this.roverDirection.getInverseLabel());
   }
 
-  set direction(newDir) {
-    this.dir = newDir;
+  moveForward() {
+    this.planetLocation.move(this.direction);
   }
 
-  set xPosition(newX) {
-    this.x = newX;
+  rotateLeft() {
+    this.roverDirection.rotateLeft();
   }
 
-  set yPosition(newY) {
-    this.y = newY;
+  rotateRight() {
+    this.roverDirection.rotateRight();
   }
 }
 
